@@ -14,8 +14,8 @@ export const useUserStore = defineStore('user', () => {
   // 使用者資訊
   const userInfo = ref<UserInfo | null>({
     id: '1',
-    name: '張三',
-    email: 'zhangsan@example.com',
+    name: '業務員老李',
+    email: 'farmer-li@example.com',
     avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
     role: '系統管理員',
     permissions: ['admin', 'user:read', 'user:write']

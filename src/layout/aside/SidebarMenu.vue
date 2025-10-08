@@ -3,6 +3,9 @@
     :options="menuOptions"
     :value="activeKey"
     :inverted="inverted"
+    :collapsed="collapsed"
+    :collapsed-width="64"
+    :collapsed-icon-size="22"
     @update:value="handleMenuSelect"
   />
 </template>
@@ -20,6 +23,7 @@ import {
 
 defineProps<{
   inverted: boolean
+  collapsed: boolean
 }>()
 
 const router = useRouter()
@@ -40,8 +44,16 @@ const menuOptions: MenuOption[] = [
     key: 'knowledge',
     icon: renderIcon(LibraryOutline),
     children: [
-      { label: '部門B', key: '/dept-b' },
-      { label: '部門C', key: '/dept-c' }
+      {
+        type: 'group',
+        label: '依部門',
+        key: 'dept',
+        children: [
+          { label: '部門A', key: '/dept-a' },
+          { label: '部門B', key: '/dept-b' },
+          { label: '部門C', key: '/dept-c' }
+        ]
+      }
     ]
   },
   {

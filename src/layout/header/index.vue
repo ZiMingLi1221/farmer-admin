@@ -1,37 +1,31 @@
 <template>
-  <n-layout-header bordered style="height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;">
-    <n-breadcrumb>
-      <n-breadcrumb-item>{{ currentTitle }}</n-breadcrumb-item>
-    </n-breadcrumb>
+  <n-layout-header 
+    bordered 
+    :style="{
+      height: '64px',
+      padding: '0 24px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }"
+  >
+    <!-- 左側：切換按鈕 + 麵包屑 -->
+    <n-space :size="12" align="center">
+      <SidebarToggle />
+      <HeaderBreadcrumb />
+    </n-space>
 
-    <n-space>
-      <n-button quaternary circle @click="toggleTheme">
-        <template #icon>
-          <n-icon size="20">
-            <MoonOutline v-if="themeMode === 'light'" />
-            <SunnyOutline v-else />
-          </n-icon>
-        </template>
-      </n-button>
+    <!-- 右側：主題切換 + 用戶選單 -->
+    <n-space :size="12" align="center">
+      <HeaderThemeToggle />
+      <HeaderUserMenu />
     </n-space>
   </n-layout-header>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { MoonOutline, SunnyOutline } from '@vicons/ionicons5'
-import { usePreferencesStore } from '@/stores/preferences'
-
-const route = useRoute()
-const preferencesStore = usePreferencesStore()
-
-const currentTitle = computed(() => route.meta?.title || '首頁')
-const themeMode = computed(() => preferencesStore.themeMode)
-
-const toggleTheme = () => {
-  preferencesStore.setThemeMode(
-    preferencesStore.themeMode === 'light' ? 'dark' : 'light'
-  )
-}
+import SidebarToggle from './SidebarToggle.vue'
+import HeaderBreadcrumb from './HeaderBreadcrumb.vue'
+import HeaderThemeToggle from './HeaderThemeToggle.vue'
+import HeaderUserMenu from './HeaderUserMenu.vue'
 </script>
